@@ -52,5 +52,17 @@ namespace F25W8DisconnectedModel
             var row = _tblProducts.Rows.Find(id);
             return row;
         }
+
+        public void InsertProduct(string name, decimal price, short quantity)
+        {
+            var row = _tblProducts.NewRow();
+            row["ProductName"] = name;
+            row["UnitPrice"] = price;
+            row["UnitsInStock"] = quantity;
+            _tblProducts.Rows.Add(row);
+
+            _adp.InsertCommand = _cmdBuilder.GetInsertCommand();
+            _adp.Update(_tblProducts);
+        }
     }
 }
