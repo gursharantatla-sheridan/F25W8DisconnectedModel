@@ -71,10 +71,17 @@ namespace F25W8DisconnectedModel
             row["ProductName"] = name;
             row["UnitPrice"] = price;
             row["UnitsInStock"] = quantity;
-            //_tblProducts.Rows.Add(row);
 
-            //_adp.InsertCommand = _cmdBuilder.GetInsertCommand();
             _adp.UpdateCommand = _cmdBuilder.GetUpdateCommand();
+            _adp.Update(_tblProducts);
+        }
+
+        public void DeleteProduct(int id)
+        {
+            var row = GetProductById(id);
+            row.Delete();
+
+            _adp.DeleteCommand = _cmdBuilder.GetDeleteCommand();
             _adp.Update(_tblProducts);
         }
     }
