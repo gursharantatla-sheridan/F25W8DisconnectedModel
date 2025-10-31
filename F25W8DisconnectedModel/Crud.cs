@@ -35,13 +35,22 @@ namespace F25W8DisconnectedModel
             _tblProducts = _ds.Tables["Products"];
 
             // define the primary key
-
+            DataColumn[] pk = new DataColumn[1];
+            pk[0] = _tblProducts.Columns["ProductID"];
+            pk[0].AutoIncrement = true;
+            _tblProducts.PrimaryKey = pk;
         }
 
         public DataTable GetAllProducts()
         {
             InitProductTable();
             return _tblProducts;
+        }
+
+        public DataRow? GetProductById(int id)
+        {
+            var row = _tblProducts.Rows.Find(id);
+            return row;
         }
     }
 }
