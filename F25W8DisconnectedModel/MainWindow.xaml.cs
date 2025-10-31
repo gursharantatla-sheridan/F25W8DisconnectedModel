@@ -100,5 +100,14 @@ namespace F25W8DisconnectedModel
             cmbCategories.DisplayMemberPath = "CategoryName";
             cmbCategories.SelectedValuePath = "CategoryID";
         }
+
+        private void cmbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCategories.SelectedItem != null)
+            {
+                int catId = (int)cmbCategories.SelectedValue;
+                grdProducts.ItemsSource = crud.GetProductsByCategory(catId).DefaultView;
+            }
+        }
     }
 }
