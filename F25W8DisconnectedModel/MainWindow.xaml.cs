@@ -88,5 +88,10 @@ namespace F25W8DisconnectedModel
             grdProducts.ItemsSource = crud.GetAllProducts().DefaultView;
             MessageBox.Show("Product deleted");
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            grdProducts.ItemsSource = crud.SearchProduct(txtName.Text).DefaultView;
+        }
     }
 }
