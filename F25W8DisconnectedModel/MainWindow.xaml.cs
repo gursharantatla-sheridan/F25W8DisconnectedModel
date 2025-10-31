@@ -93,5 +93,12 @@ namespace F25W8DisconnectedModel
         {
             grdProducts.ItemsSource = crud.SearchProduct(txtName.Text).DefaultView;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cmbCategories.ItemsSource = crud.GetCategories().DefaultView;
+            cmbCategories.DisplayMemberPath = "CategoryName";
+            cmbCategories.SelectedValuePath = "CategoryID";
+        }
     }
 }

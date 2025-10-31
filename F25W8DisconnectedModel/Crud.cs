@@ -98,5 +98,30 @@ namespace F25W8DisconnectedModel
 
             return ds.Tables["Products"];
         }
+
+        public DataTable GetCategories()
+        {
+            string query = "select CategoryID, CategoryName from Categories";
+
+            SqlDataAdapter adpCats = new SqlDataAdapter(query, _conn);
+            DataSet ds = new DataSet();
+            adpCats.Fill(ds, "Categories");
+
+            return ds.Tables["Categories"];
+        }
+
+        public DataTable GetProductsByCategory(int catId)
+        {
+            string query = "select ProductID, ProductName, CategoryID from Products where CategoryID = @catId";
+
+            SqlCommand cmd = new SqlCommand(query, _conn);
+            cmd.Parameters.AddWithValue("catId", catId);
+
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            adp.Fill(ds, "Products");
+
+            return ds.Tables["Products"];
+        }
     }
 }
